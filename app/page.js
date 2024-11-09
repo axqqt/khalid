@@ -1,14 +1,16 @@
 "use client"
-import Contact from "@/componets/home/Contact";
-import Hero from "@/componets/home/Hero";
-import Services from "@/componets/home/Services";
+
+import Services from "./components/home/Services";
+import Contact from "./components/layout/home/Contact";
+import Hero from "./components/layout/home/Hero";
+
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Services />
-      <Contact />
+      <Contact/>
     </>
   );
 }
