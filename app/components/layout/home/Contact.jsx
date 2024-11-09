@@ -1,10 +1,4 @@
 import { useState } from "react";
-import Airtable from "airtable";
-
-// Initialize Airtable
-const base = new Airtable({
-  apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
-}).base(process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID);
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -33,33 +27,33 @@ export default function Contact() {
     setStatus({ message: "", type: "" });
 
     try {
-      const submissionDate = new Date().toISOString().split("T")[0];
-
-      await base(process.env.NEXT_PUBLIC_AIRTABLE_TABLE_NAME).create([
-        {
-          fields: {
-            Name: formData.name,
-            Phone: formData.phone,
-            Description: formData.description,
-            Email: formData.email,
-            Date: submissionDate,
-          },
+      const response = await fetch('/api/submit-contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      ]);
-
-      setFormData({
-        name: "",
-        phone: "",
-        description: "",
-        email: "",
+        body: JSON.stringify(formData),
       });
 
-      setStatus({
-        message: "Thank you for your message! We will get back to you soon.",
-        type: "success",
-      });
+      const data = await response.json();
+
+      if (response.ok) {
+        setFormData({
+          name: "",
+          phone: "",
+          description: "",
+          email: "",
+        });
+
+        setStatus({
+          message: "Thank you for your message! We will get back to you soon.",
+          type: "success",
+        });
+      } else {
+        throw new Error(data.message || 'Something went wrong');
+      }
     } catch (error) {
-      console.error("Error submitting to Airtable:", error);
+      console.error("Error submitting form:", error);
       setStatus({
         message: "There was an error submitting your message. Please try again.",
         type: "error",
@@ -75,7 +69,7 @@ export default function Contact() {
       <div 
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('/api/placeholder/1920/1080')", // Replace with your actual image path
+          backgroundImage: "url('/api/placeholder/1920/1080')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
@@ -90,7 +84,7 @@ export default function Contact() {
 
         {status.message && (
           <div
-            className={`mb-6 p-4 rounded-lg  ${
+            className={`mb-6 p-4 rounded-lg ${
               status.type === "success"
                 ? "bg-green-50 text-green-800"
                 : "bg-red-50 text-red-800"
