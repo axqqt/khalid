@@ -3,7 +3,7 @@ import Airtable from "airtable";
 
 // Initialize Airtable
 const base = new Airtable({
-  apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY, // Should be valid here
+  apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
 }).base(process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID);
 
 export default function Contact() {
@@ -15,7 +15,7 @@ export default function Contact() {
   });
   const [status, setStatus] = useState({
     message: "",
-    type: "", // 'success' or 'error'
+    type: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -47,7 +47,6 @@ export default function Contact() {
         },
       ]);
 
-      // Clear form after success
       setFormData({
         name: "",
         phone: "",
@@ -62,8 +61,7 @@ export default function Contact() {
     } catch (error) {
       console.error("Error submitting to Airtable:", error);
       setStatus({
-        message:
-          "There was an error submitting your message. Please try again.",
+        message: "There was an error submitting your message. Please try again.",
         type: "error",
       });
     } finally {
@@ -72,13 +70,27 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-white">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12">Contact Me</h2>
+    <section id="contact" className="relative py-20">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('/api/placeholder/1920/1080')", // Replace with your actual image path
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/80"></div>
+      </div>
+
+      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold text-center mb-12 text-white">Contact Me</h2>
 
         {status.message && (
           <div
-            className={`mb-6 p-4 rounded-black-lg  ${
+            className={`mb-6 p-4 rounded-lg  ${
               status.type === "success"
                 ? "bg-green-50 text-green-800"
                 : "bg-red-50 text-red-800"
@@ -90,7 +102,7 @@ export default function Contact() {
 
         <form
           onSubmit={handleSubmit}
-          className="space-y-6 bg-gray-50 p-8 rounded-lg shadow-lg"
+          className="space-y-6 bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-xl"
         >
           <div>
             <label
@@ -105,7 +117,7 @@ export default function Contact() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full rounded-lg"
+              className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Your name"
             />
           </div>
@@ -123,7 +135,7 @@ export default function Contact() {
               value={formData.phone}
               onChange={handleChange}
               required
-              className="w-full rounded-lg"
+              className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Your phone number"
             />
           </div>
@@ -140,7 +152,7 @@ export default function Contact() {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full rounded-lg"
+              className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Your email (Optional)"
             />
           </div>
@@ -158,7 +170,7 @@ export default function Contact() {
               value={formData.description}
               onChange={handleChange}
               required
-              className="w-full rounded-lg"
+              className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Tell us about your requirements"
             ></textarea>
           </div>
@@ -172,7 +184,7 @@ export default function Contact() {
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-blue-700"
               } 
-              transition-all shadow-lg`}
+              transition-all shadow-lg hover:shadow-blue-500/25`}
           >
             {isSubmitting ? "Sending..." : "Send Message"}
           </button>
