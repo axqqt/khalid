@@ -45,7 +45,7 @@ export default function Contact() {
         message: "Thank you for your message! We will get back to you soon.",
         type: "success",
       });
-      setInterval(() => {
+      setTimeout(() => {
         setStatus({ message: "", type: "" });
       }, 5000);
     } catch (error) {
