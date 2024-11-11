@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -27,35 +28,27 @@ export default function Contact() {
     setStatus({ message: "", type: "" });
 
     try {
-      const response = await fetch('/api/submit-contact', {
-        method: 'POST',
+      const { data } = await axios.post('/api/submit-contact', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      setFormData({
+        name: "",
+        phone: "",
+        description: "",
+        email: "",
+      });
 
-      if (response.ok) {
-        setFormData({
-          name: "",
-          phone: "",
-          description: "",
-          email: "",
-        });
-
-        setStatus({
-          message: "Thank you for your message! We will get back to you soon.",
-          type: "success",
-        });
-      } else {
-        throw new Error(data.message || 'Something went wrong');
-      }
+      setStatus({
+        message: "Thank you for your message! We will get back to you soon.",
+        type: "success",
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
       setStatus({
-        message: "There was an error submitting your message. Please try again.",
+        message: error.response?.data?.message || "There was an error submitting your message. Please try again.",
         type: "error",
       });
     } finally {

@@ -10,14 +10,17 @@
   },
   "dependencies": {
     "airtable": "^0.12.2",
+    "axios": "^1.7.7",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
+    "firebase": "^11.0.1",
     "googleapis": "^144.0.0",
     "lucide-react": "^0.456.0",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-    "tailwind-merge": "^2.5.4"
+    "tailwind-merge": "^2.5.4",
+    "twilio": "^5.3.5"
   },
   "devDependencies": {
     "eslint": "^8",
