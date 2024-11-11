@@ -28,9 +28,9 @@ export default function Contact() {
     setStatus({ message: "", type: "" });
 
     try {
-      const { data } = await axios.post('/api/submit-contact', formData, {
+      const { data } = await axios.post("/api/submit-contact", formData, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
@@ -45,10 +45,15 @@ export default function Contact() {
         message: "Thank you for your message! We will get back to you soon.",
         type: "success",
       });
+      setInterval(() => {
+        setStatus({ message: "", type: "" });
+      }, 5000);
     } catch (error) {
       console.error("Error submitting form:", error);
       setStatus({
-        message: error.response?.data?.message || "There was an error submitting your message. Please try again.",
+        message:
+          error.response?.data?.message ||
+          "There was an error submitting your message. Please try again.",
         type: "error",
       });
     } finally {
@@ -59,13 +64,13 @@ export default function Contact() {
   return (
     <section id="contact" className="relative py-20">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: "url('/api/placeholder/1920/1080')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
         }}
       >
         {/* Overlay */}
@@ -73,7 +78,9 @@ export default function Contact() {
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12 text-white">Contact Me</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 text-white">
+          Contact Me
+        </h2>
 
         {status.message && (
           <div
