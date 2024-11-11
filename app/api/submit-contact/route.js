@@ -1,7 +1,12 @@
-import { NextResponse } from 'next/server';
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, Timestamp } from 'firebase/firestore';
-import twilio from 'twilio';
+import { NextResponse } from "next/server";
+import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  Timestamp,
+} from "firebase/firestore";
+import twilio from "twilio";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -11,7 +16,7 @@ const firebaseConfig = {
   storageBucket: "problems-33746.appspot.com",
   messagingSenderId: "4637713392",
   appId: "1:4637713392:web:cb8de88019d96a132bf335",
-  measurementId: "G-LCBEGTE3B2"
+  measurementId: "G-LCBEGTE3B2",
 };
 
 // Environment variables for notifications
@@ -26,24 +31,25 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Initialize Twilio
-const twilioClient = TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN 
-  ? twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-  : null;
+const twilioClient =
+  TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN
+    ? twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+    : null;
 
 // Function to save data to Firestore
 async function saveToFirestore(data) {
   try {
-    const submissionsRef = collection(db, 'clients');
+    const submissionsRef = collection(db, "clients");
     const docRef = await addDoc(submissionsRef, {
       ...data,
       createdAt: Timestamp.now(),
-      status: 'new'
+      status: "new",
     });
-    
+
     return docRef.id;
   } catch (error) {
-    console.error('Error saving to Firestore:', error);
-    throw new Error('Failed to save submission to database');
+    console.error("Error saving to Firestore:", error);
+    throw new Error("Failed to save submission to database");
   }
 }
 
@@ -71,10 +77,10 @@ Reference ID: ${data.submissionId}
     await twilioClient.messages.create({
       body: message,
       from: TWILIO_WHATSAPP_FROM,
-      to: OWNER_WHATSAPP_NUMBER
+      to: OWNER_WHATSAPP_NUMBER,
     });
   } catch (error) {
-    console.error('Error sending WhatsApp message:', error);
+    console.error("Error sending WhatsApp message:", error);
     // Don't throw error to prevent blocking the submission process
   }
 }
@@ -85,8 +91,8 @@ async function sendZapierNotification(data) {
 
   try {
     await fetch(ZAPIER_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: data.name,
         phone: data.phone,
@@ -94,11 +100,11 @@ async function sendZapierNotification(data) {
         description: data.description,
         submissionDate: data.submissionDate,
         submissionId: data.submissionId,
-        type: 'new_lead'
-      })
+        type: "new_lead",
+      }),
     });
   } catch (error) {
-    console.error('Error sending Zapier notification:', error);
+    console.error("Error sending Zapier notification:", error);
     // Don't throw error to prevent blocking the submission process
   }
 }
@@ -108,14 +114,15 @@ export async function POST(request) {
     // Parse the request body
     const body = await request.json();
     const { name, phone, email, description } = body;
-    const submissionDate = new Date().toISOString().split('T')[0];
+    const submissionDate = new Date().toISOString().split("T")[0];
 
     // Validate the request body
     if (!name || !phone || !email || !description) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Missing required fields: name, phone, email, or description.',
+          message:
+            "Missing required fields: name, phone, email, or description.",
         },
         { status: 400 }
       );
@@ -137,7 +144,7 @@ export async function POST(request) {
       email,
       description,
       submissionDate,
-      submissionId
+      submissionId,
     };
 
     // Send notifications (both WhatsApp and Zapier)
@@ -149,16 +156,16 @@ export async function POST(request) {
     // Return success response
     return NextResponse.json({
       success: true,
-      message: 'Submission successfully saved and notifications sent',
-      submissionId
+      message: "Submission successfully saved and notifications sent",
+      submissionId,
     });
   } catch (error) {
-    console.error('Error during submission:', error);
+    console.error("Error during submission:", error);
 
     return NextResponse.json(
       {
         success: false,
-        message: 'Error during submission',
+        message: "Error during submission",
         error: error.message,
       },
       { status: 500 }
