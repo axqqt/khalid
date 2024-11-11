@@ -20,21 +20,21 @@ const firebaseConfig = {
 };
 
 // Environment variables for notifications
-// const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
-// const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
-// const TWILIO_WHATSAPP_FROM = process.env.TWILIO_WHATSAPP_FROM; // Should be in format: whatsapp:+14155238886
-// const OWNER_WHATSAPP_NUMBER = process.env.OWNER_WHATSAPP_NUMBER; // Should be in format: whatsapp:+1234567890
-// const ZAPIER_WEBHOOK_URL = process.env.ZAPIER_WEBHOOK_URL;
+const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
+const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+const TWILIO_WHATSAPP_FROM = process.env.TWILIO_WHATSAPP_FROM; // Should be in format: whatsapp:+14155238886
+const OWNER_WHATSAPP_NUMBER = process.env.OWNER_WHATSAPP_NUMBER; // Should be in format: whatsapp:+1234567890
+const ZAPIER_WEBHOOK_URL = process.env.ZAPIER_WEBHOOK_URL;
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Initialize Twilio
-// const twilioClient =
-//   TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN
-//     ? twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-//     : null;
+const twilioClient =
+  TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN
+    ? twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+    : null;
 
 // Function to save data to Firestore
 async function saveToFirestore(data) {
