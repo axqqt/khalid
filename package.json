@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vonage/server-sdk": "^3.19.1",
     "airtable": "^0.12.2",
     "axios": "^1.7.7",
     "clsx": "^2.1.1",

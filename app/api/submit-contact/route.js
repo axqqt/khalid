@@ -1,3 +1,4 @@
+"use server";
 import { NextResponse } from "next/server";
 import { initializeApp } from "firebase/app";
 import {
@@ -6,7 +7,7 @@ import {
   addDoc,
   Timestamp,
 } from "firebase/firestore";
-import twilio from "twilio";
+import {Vonage} from "@vonage/server-sdk";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -20,21 +21,20 @@ const firebaseConfig = {
 };
 
 // Environment variables for notifications
-const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
-const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
-const TWILIO_WHATSAPP_FROM = process.env.TWILIO_WHATSAPP_FROM; // Should be in format: whatsapp:+14155238886
+const VONAGE_API_KEY = process.env.VONAGE_API_KEY;
+const VONAGE_API_SECRET = process.env.VONAGE_API_SECRET;
+const VONAGE_WHATSAPP_FROM = process.env.VONAGE_WHATSAPP_FROM; // Should be in format: whatsapp:+14155238886
 const OWNER_WHATSAPP_NUMBER = process.env.OWNER_WHATSAPP_NUMBER; // Should be in format: whatsapp:+1234567890
-const ZAPIER_WEBHOOK_URL = process.env.ZAPIER_WEBHOOK_URL;
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Initialize Twilio
-const twilioClient =
-  TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN
-    ? twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-    : null;
+// Initialize Vonage
+const vonage = new Vonage({
+  apiKey: VONAGE_API_KEY,
+  apiSecret: VONAGE_API_SECRET,
+});
 
 // Function to save data to Firestore
 async function saveToFirestore(data) {
@@ -53,17 +53,15 @@ async function saveToFirestore(data) {
   }
 }
 
-// Function to send WhatsApp notification via Twilio
+// Function to send WhatsApp notification via Vonage
 async function sendWhatsAppNotification(data) {
-  if (!twilioClient) return;
-
   const message = `
 🏠 *New Lead Alert!*
 
 *Contact Details:*
 👤 Name: ${data.name}
 📱 Phone: ${data.phone}
-📧 Email: ${data.email}
+📧 Email: ${data.email ? data.email : "Email not provided"}
 
 *Message:*
 ${data.description}
@@ -74,14 +72,19 @@ Reference ID: ${data.submissionId}
 `.trim();
 
   try {
-    await twilioClient.messages.create({
-      body: message,
-      from: TWILIO_WHATSAPP_FROM,
+    await vonage.messages.send({
       to: OWNER_WHATSAPP_NUMBER,
+      from: VONAGE_WHATSAPP_FROM,
+      channel: 'whatsapp',
+      message_type: 'text',
+      text: message,
     });
+    console.log("WhatsApp message sent successfully.");
   } catch (error) {
+    if (error.response) {
+      console.error("Error response data:", error.response.data);
+    }
     console.error("Error sending WhatsApp message:", error);
-    // Don't throw error to prevent blocking the submission process
   }
 }
 
@@ -148,10 +151,10 @@ export async function POST(request) {
     };
 
     // Send notifications (both WhatsApp and Zapier)
-    // await Promise.all([
-    //   sendWhatsAppNotification(notificationData),
-    //   // sendZapierNotification(notificationData)
-    // ]);
+    await Promise.all([
+      sendWhatsAppNotification(notificationData),
+      // sendZapierNotification(notificationData),
+    ]);
 
     // Return success response
     return NextResponse.json({
