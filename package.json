@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vonage/messages": "^1.18.1",
     "@vonage/server-sdk": "^3.19.1",
     "airtable": "^0.12.2",
     "axios": "^1.7.7",

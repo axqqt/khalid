@@ -1,13 +1,8 @@
 "use server";
 import { NextResponse } from "next/server";
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  Timestamp,
-} from "firebase/firestore";
-import {Vonage} from "@vonage/server-sdk";
+import { getFirestore, collection, addDoc, Timestamp } from "firebase/firestore";
+import { Vonage } from "@vonage/server-sdk";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -23,8 +18,9 @@ const firebaseConfig = {
 // Environment variables for notifications
 const VONAGE_API_KEY = process.env.VONAGE_API_KEY;
 const VONAGE_API_SECRET = process.env.VONAGE_API_SECRET;
-const VONAGE_WHATSAPP_FROM = process.env.VONAGE_WHATSAPP_FROM; // Should be in format: whatsapp:+14155238886
-const OWNER_WHATSAPP_NUMBER = process.env.OWNER_WHATSAPP_NUMBER; // Should be in format: whatsapp:+1234567890
+const VONAGE_WHATSAPP_FROM = process.env.VONAGE_WHATSAPP_FROM; // Format: whatsapp:+14155238886
+const OWNER_WHATSAPP_NUMBER = `whatsapp:+971525906261`;
+const ZAPIER_WEBHOOK_URL = process.env.ZAPIER_WEBHOOK_URL; // Zapier webhook URL
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -56,17 +52,17 @@ async function saveToFirestore(data) {
 // Function to send WhatsApp notification via Vonage
 async function sendWhatsAppNotification(data) {
   const message = `
-🏠 *New Lead Alert!*
+New Lead Alert!
 
-*Contact Details:*
-👤 Name: ${data.name}
-📱 Phone: ${data.phone}
-📧 Email: ${data.email ? data.email : "Email not provided"}
+Contact Details:
+Name: ${data.name}
+Phone: ${data.phone}
+Email: ${data.email || "Email not provided"}
 
-*Message:*
+Message:
 ${data.description}
 
-*Date:* ${data.submissionDate}
+Date: ${data.submissionDate}
 
 Reference ID: ${data.submissionId}
 `.trim();
@@ -75,16 +71,13 @@ Reference ID: ${data.submissionId}
     await vonage.messages.send({
       to: OWNER_WHATSAPP_NUMBER,
       from: VONAGE_WHATSAPP_FROM,
-      channel: 'whatsapp',
-      message_type: 'text',
+      channel: "whatsapp",
+      message_type: "text",
       text: message,
     });
     console.log("WhatsApp message sent successfully.");
   } catch (error) {
-    if (error.response) {
-      console.error("Error response data:", error.response.data);
-    }
-    console.error("Error sending WhatsApp message:", error);
+    console.error("Error sending WhatsApp message:", error?.response?.data || error);
   }
 }
 
@@ -108,30 +101,25 @@ async function sendZapierNotification(data) {
     });
   } catch (error) {
     console.error("Error sending Zapier notification:", error);
-    // Don't throw error to prevent blocking the submission process
   }
 }
 
 export async function POST(request) {
   try {
-    // Parse the request body
     const body = await request.json();
     const { name, phone, email, description } = body;
     const submissionDate = new Date().toISOString().split("T")[0];
 
-    // Validate the request body
     if (!name || !phone || !email || !description) {
       return NextResponse.json(
         {
           success: false,
-          message:
-            "Missing required fields: name, phone, email, or description.",
+          message: "Missing required fields: name, phone, email, or description.",
         },
         { status: 400 }
       );
     }
 
-    // Save data to Firestore
     const submissionId = await saveToFirestore({
       name,
       phone,
@@ -140,7 +128,6 @@ export async function POST(request) {
       submissionDate,
     });
 
-    // Prepare notification data
     const notificationData = {
       name,
       phone,
@@ -150,13 +137,12 @@ export async function POST(request) {
       submissionId,
     };
 
-    // Send notifications (both WhatsApp and Zapier)
     await Promise.all([
       sendWhatsAppNotification(notificationData),
+      // Uncomment below to enable Zapier notification
       // sendZapierNotification(notificationData),
     ]);
 
-    // Return success response
     return NextResponse.json({
       success: true,
       message: "Submission successfully saved and notifications sent",
