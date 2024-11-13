@@ -129,7 +129,6 @@ export default function Contact() {
               value={formData.phone}
               onChange={handleChange}
               required
-              minLength={7}
               className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Your phone number"
             />
@@ -148,7 +147,7 @@ export default function Contact() {
               value={formData.email}
               onChange={handleChange}
               className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Your email (Optional)"
+              placeholder="Your Email (Optional)"
             />
           </div>
 
@@ -181,7 +180,7 @@ export default function Contact() {
               } 
               transition-all shadow-lg hover:shadow-blue-500/25`}
           >
-            {isSubmitting ? "Sending..." : "Send Message"}
+            {isSubmitting ? "Sending..." : "Contact Us"}
           </button>
         </form>
       </div>
