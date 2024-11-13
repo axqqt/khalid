@@ -42,7 +42,7 @@ export default function Contact() {
       });
 
       setStatus({
-        message: "Thank you for your message! We will get back to you soon.",
+        message: "Thank you for reaching out! We’ll be in touch with you soon.",
         type: "success",
       });
       setTimeout(() => {
@@ -62,8 +62,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-20">
-      {/* Background Image */}
+    <section id="contact" className="relative py-24 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 text-white">
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -73,21 +72,23 @@ export default function Contact() {
           backgroundAttachment: "fixed",
         }}
       >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/80"></div>
+        <div className="absolute inset-0 bg-black/60"></div>
       </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12 text-white">
-          Contact Me
+      <div className="relative z-10 max-w-2xl mx-auto px-6 sm:px-10">
+        <h2 className="text-4xl font-extrabold text-center mb-10">
+          Connect with Veloxify
         </h2>
+        <p className="text-lg text-center mb-12">
+          Ready to discuss your real estate goals? We’re here to guide you every step of the way.
+        </p>
 
         {status.message && (
           <div
-            className={`mb-6 p-4 rounded-lg ${
+            className={`mb-6 p-4 rounded-lg text-center ${
               status.type === "success"
-                ? "bg-green-50 text-green-800"
-                : "bg-red-50 text-red-800"
+                ? "bg-green-600 text-white"
+                : "bg-red-600 text-white"
             }`}
           >
             {status.message}
@@ -96,14 +97,14 @@ export default function Contact() {
 
         <form
           onSubmit={handleSubmit}
-          className="space-y-6 bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-xl"
+          className="space-y-6 bg-white/90 text-gray-800 p-8 rounded-lg shadow-2xl"
         >
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-semibold mb-1"
             >
-              Name
+              Full Name
             </label>
             <input
               type="text"
@@ -111,17 +112,17 @@ export default function Contact() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Your name"
+              className="w-full rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Enter your full name"
             />
           </div>
 
           <div>
             <label
               htmlFor="phone"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-semibold mb-1"
             >
-              Phone
+              Phone Number
             </label>
             <input
               type="tel"
@@ -129,7 +130,7 @@ export default function Contact() {
               value={formData.phone}
               onChange={handleChange}
               required
-              className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Your phone number"
             />
           </div>
@@ -137,26 +138,26 @@ export default function Contact() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-semibold mb-1"
             >
-              Email
+              Email Address
             </label>
             <input
               type="email"
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Your Email (Optional)"
+              className="w-full rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Your email address"
             />
           </div>
 
           <div>
             <label
               htmlFor="description"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-semibold mb-1"
             >
-              Description
+              Message
             </label>
             <textarea
               id="description"
@@ -164,23 +165,19 @@ export default function Contact() {
               value={formData.description}
               onChange={handleChange}
               required
-              className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Tell us about your requirements"
+              className="w-full rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Tell us about your needs and goals"
             ></textarea>
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold 
-              ${
-                isSubmitting
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-blue-700"
-              } 
+            className={`w-full bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold 
+              ${isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-800"}
               transition-all shadow-lg hover:shadow-blue-500/25`}
           >
-            {isSubmitting ? "Sending..." : "Contact Us"}
+            {isSubmitting ? "Submitting..." : "Send Message"}
           </button>
         </form>
       </div>

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
-import { Badge } from 'lucide-react';
-import { Bed, Bath, Square, MapPin } from 'lucide-react';
+import { Badge } from "../ui/badge";
+import { Bed, Bath, Square, MapPin, Heart, Share2, Calendar, Link } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const FeaturedProperties = () => {
+  const [hoveredId, setHoveredId] = useState(null);
+
   const properties = [
     {
       id: 1,
@@ -15,7 +18,9 @@ const FeaturedProperties = () => {
       sqft: 1200,
       image: "/api/placeholder/400/250",
       type: "For Sale",
-      isNew: true
+      isNew: true,
+      listed: "2 days ago",
+      features: ["Smart Home", "Pet Friendly", "Garage"]
     },
     {
       id: 2,
@@ -27,7 +32,9 @@ const FeaturedProperties = () => {
       sqft: 2400,
       image: "/api/placeholder/400/250",
       type: "For Sale",
-      isNew: false
+      isNew: false,
+      listed: "1 week ago",
+      features: ["Pool", "Garden", "Home Office"]
     },
     {
       id: 3,
@@ -39,70 +46,122 @@ const FeaturedProperties = () => {
       sqft: 2800,
       image: "/api/placeholder/400/250",
       type: "For Sale",
-      isNew: true
+      isNew: true,
+      listed: "3 days ago",
+      features: ["City View", "Concierge", "Gym"]
     }
   ];
 
+  const fadeInUp = {
+    initial: { y: 20, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    transition: { duration: 0.5 }
+  };
+
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Featured Properties</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
+            Featured Properties
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Discover our hand-picked selection of premium properties in the most desirable locations
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {properties.map((property) => (
-            <Card key={property.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <CardHeader className="p-0">
-                <div className="relative">
-                  <img
-                    src={property.image}
-                    alt={property.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <Badge className="bg-blue-500">{property.type}</Badge>
-                    {property.isNew && (
-                      <Badge className="bg-green-500">New</Badge>
-                    )}
+          {properties.map((property, index) => (
+            <motion.div
+              key={property.id}
+              initial="initial"
+              animate="animate"
+              variants={fadeInUp}
+              transition={{ delay: index * 0.2 }}
+            >
+              <Card 
+                className="overflow-hidden group transition-all duration-300 hover:shadow-2xl"
+                onMouseEnter={() => setHoveredId(property.id)}
+                onMouseLeave={() => setHoveredId(null)}
+              >
+                <CardHeader className="p-0">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={property.image}
+                      alt={property.title}
+                      className="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute top-4 left-4 flex gap-2">
+                      <Badge variant="default" className="bg-blue-600 hover:bg-blue-700">
+                        {property.type}
+                      </Badge>
+                      {property.isNew && (
+                        <Badge variant="default" className="bg-green-600 hover:bg-green-700">
+                          New
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="absolute bottom-4 right-4 flex gap-2">
+                      <button className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors">
+                        <Heart className="w-4 h-4 text-gray-700" />
+                      </button>
+                      <button className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors">
+                        <Share2 className="w-4 h-4 text-gray-700" />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
-              
-              <CardContent className="p-6">
-                <CardTitle className="mb-2">{property.title}</CardTitle>
-                <p className="text-2xl font-bold text-blue-600 mb-4">{property.price}</p>
+                </CardHeader>
                 
-                <div className="flex items-center text-gray-500 mb-4">
-                  <MapPin className="w-4 h-4 mr-2" />
-                  <span className="text-sm">{property.location}</span>
-                </div>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>Listed {property.listed}</span>
+                  </div>
+                  
+                  <CardTitle className="text-xl mb-2 font-bold">{property.title}</CardTitle>
+                  <p className="text-3xl font-bold text-blue-600 mb-4">{property.price}</p>
+                  
+                  <div className="flex items-center text-gray-600 mb-4">
+                    <MapPin className="w-4 h-4 mr-2 text-blue-600" />
+                    <span className="text-sm">{property.location}</span>
+                  </div>
 
-                <div className="grid grid-cols-3 gap-4 text-sm text-gray-600">
-                  <div className="flex items-center">
-                    <Bed className="w-4 h-4 mr-2" />
-                    <span>{property.beds} Beds</span>
+                  <div className="grid grid-cols-3 gap-4 text-sm text-gray-600 mb-4">
+                    <div className="flex items-center">
+                      <Bed className="w-4 h-4 mr-2 text-blue-600" />
+                      <span>{property.beds} Beds</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Bath className="w-4 h-4 mr-2 text-blue-600" />
+                      <span>{property.baths} Baths</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Square className="w-4 h-4 mr-2 text-blue-600" />
+                      <span>{property.sqft} sqft</span>
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    <Bath className="w-4 h-4 mr-2" />
-                    <span>{property.baths} Baths</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Square className="w-4 h-4 mr-2" />
-                    <span>{property.sqft} sqft</span>
-                  </div>
-                </div>
-              </CardContent>
 
-              <CardFooter className="px-6 pb-6 pt-0">
-                <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                  View Details
-                </button>
-              </CardFooter>
-            </Card>
+                  <div className="flex gap-2 flex-wrap">
+                    {property.features.map((feature, idx) => (
+                      <Badge key={idx} variant="secondary" className="bg-gray-100 text-gray-600">
+                        {feature}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+
+                <CardFooter className="px-6 pb-6 pt-0">
+                  <Link className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg hover:shadow-blue-200" href={`/listings/${123}`}>
+                    View Details
+                  </Link>
+                </CardFooter>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
