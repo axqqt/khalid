@@ -6,7 +6,7 @@ import {
   addDoc,
   Timestamp,
 } from "firebase/firestore";
-import twilio from "twilio";
+import { Resend } from 'resend';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -19,22 +19,14 @@ const firebaseConfig = {
   measurementId: "G-LCBEGTE3B2",
 };
 
-// Environment variables for notifications
-const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
-const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
-const TWILIO_WHATSAPP_FROM = process.env.TWILIO_WHATSAPP_FROM; // Should be in format: whatsapp:+14155238886
-const OWNER_WHATSAPP_NUMBER = process.env.OWNER_WHATSAPP_NUMBER; // Should be in format: whatsapp:+1234567890
-const ZAPIER_WEBHOOK_URL = process.env.ZAPIER_WEBHOOK_URL;
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Initialize Twilio
-const twilioClient =
-  TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN
-    ? twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-    : null;
+// Initialize Resend with your API key
+const resend = new Resend('re_gbXr7hK5_FR7tKgaJ4n4Zdy31n9TzgZAB');
+const OWNER_EMAIL = 'khalidqari1230@gmail.com';
+const NOTIFICATION_FROM_EMAIL = 'onboarding@resend.dev';
 
 // Function to save data to Firestore
 async function saveToFirestore(data) {
@@ -53,58 +45,38 @@ async function saveToFirestore(data) {
   }
 }
 
-// Function to send WhatsApp notification via Twilio
-async function sendWhatsAppNotification(data) {
-  if (!twilioClient) return;
-
-  const message = `
-🏠 *New Lead Alert!*
-
-*Contact Details:*
-👤 Name: ${data.name}
-📱 Phone: ${data.phone}
-📧 Email: ${data.email}
-
-*Message:*
-${data.description}
-
-*Date:* ${data.submissionDate}
-
-Reference ID: ${data.submissionId}
-`.trim();
-
+// Function to send email notification
+async function sendEmailNotification(data) {
   try {
-    await twilioClient.messages.create({
-      body: message,
-      from: TWILIO_WHATSAPP_FROM,
-      to: OWNER_WHATSAPP_NUMBER,
+    await resend.emails.send({
+      from: NOTIFICATION_FROM_EMAIL,
+      to: OWNER_EMAIL,
+      subject: `New Lead: ${data.name}`,
+      html: `
+        <div style="font-family: system-ui, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #0f172a; margin-bottom: 24px;">🎯 New Lead Alert!</h2>
+          
+          <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+            <h3 style="color: #0f172a; margin-top: 0;">Contact Details</h3>
+            <p style="margin: 8px 0;"><strong>Name:</strong> ${data.name}</p>
+            <p style="margin: 8px 0;"><strong>Phone:</strong> ${data.phone}</p>
+            <p style="margin: 8px 0;"><strong>Email:</strong> ${data.email}</p>
+          </div>
+
+          <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+            <h3 style="color: #0f172a; margin-top: 0;">Message</h3>
+            <p style="margin: 8px 0;">${data.description}</p>
+          </div>
+
+          <div style="color: #64748b; font-size: 14px;">
+            <p style="margin: 4px 0;">Date: ${data.submissionDate}</p>
+            <p style="margin: 4px 0;">Reference ID: ${data.submissionId}</p>
+          </div>
+        </div>
+      `,
     });
   } catch (error) {
-    console.error("Error sending WhatsApp message:", error);
-    // Don't throw error to prevent blocking the submission process
-  }
-}
-
-// Function to send notification via Zapier
-async function sendZapierNotification(data) {
-  if (!ZAPIER_WEBHOOK_URL) return;
-
-  try {
-    await fetch(ZAPIER_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: data.name,
-        phone: data.phone,
-        email: data.email,
-        description: data.description,
-        submissionDate: data.submissionDate,
-        submissionId: data.submissionId,
-        type: "new_lead",
-      }),
-    });
-  } catch (error) {
-    console.error("Error sending Zapier notification:", error);
+    console.error("Error sending email:", error);
     // Don't throw error to prevent blocking the submission process
   }
 }
@@ -121,8 +93,7 @@ export async function POST(request) {
       return NextResponse.json(
         {
           success: false,
-          message:
-            "Missing required fields: name, phone, email, or description.",
+          message: "Missing required fields: name, phone, email, or description.",
         },
         { status: 400 }
       );
@@ -147,16 +118,13 @@ export async function POST(request) {
       submissionId,
     };
 
-    // Send notifications (both WhatsApp and Zapier)
-    await Promise.all([
-      sendWhatsAppNotification(notificationData),
-      // sendZapierNotification(notificationData)
-    ]);
+    // Send email notification
+    await sendEmailNotification(notificationData);
 
     // Return success response
     return NextResponse.json({
       success: true,
-      message: "Submission successfully saved and notifications sent",
+      message: "Submission successfully saved and notification sent",
       submissionId,
     });
   } catch (error) {

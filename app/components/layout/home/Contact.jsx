@@ -62,7 +62,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-24 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 text-white">
+    <section
+      id="contact"
+      className="relative py-24 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 text-white"
+    >
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -80,7 +83,8 @@ export default function Contact() {
           Connect with Veloxify
         </h2>
         <p className="text-lg text-center mb-12">
-          Ready to discuss your real estate goals? We’re here to guide you every step of the way.
+          Ready to discuss your real estate goals? We’re here to guide you every
+          step of the way.
         </p>
 
         {status.message && (
@@ -100,10 +104,7 @@ export default function Contact() {
           className="space-y-6 bg-white/90 text-gray-800 p-8 rounded-lg shadow-2xl"
         >
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-semibold mb-1"
-            >
+            <label htmlFor="name" className="block text-sm font-semibold mb-1">
               Full Name
             </label>
             <input
@@ -118,10 +119,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label
-              htmlFor="phone"
-              className="block text-sm font-semibold mb-1"
-            >
+            <label htmlFor="phone" className="block text-sm font-semibold mb-1">
               Phone Number
             </label>
             <input
@@ -136,10 +134,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-semibold mb-1"
-            >
+            <label htmlFor="email" className="block text-sm font-semibold mb-1">
               Email Address
             </label>
             <input
@@ -174,7 +169,11 @@ export default function Contact() {
             type="submit"
             disabled={isSubmitting}
             className={`w-full bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold 
-              ${isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-800"}
+              ${
+                isSubmitting
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-blue-800"
+              }
               transition-all shadow-lg hover:shadow-blue-500/25`}
           >
             {isSubmitting ? "Submitting..." : "Send Message"}
