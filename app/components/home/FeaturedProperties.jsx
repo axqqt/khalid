@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import {
   Card,
@@ -16,91 +17,62 @@ import {
   Share2,
   Calendar,
   Link,
+  Home,
+  Building,
+  Search,
 } from "lucide-react";
-import { motion } from "framer-motion";
 
-const FeaturedProperties = () => {
+const FeaturedProperties = ({ properties = [] }) => {
   const [hoveredId, setHoveredId] = useState(null);
 
-  const properties = [
-    {
-      id: 1,
-      title: "Modern Downtown Condo",
-      price: "$599,000",
-      location: "123 Downtown Ave",
-      beds: 2,
-      baths: 2,
-      sqft: 1200,
-      image: "/api/placeholder/400/250",
-      type: "For Sale",
-      isNew: true,
-      listed: "2 days ago",
-      features: ["Smart Home", "Pet Friendly", "Garage"],
-    },
-    {
-      id: 2,
-      title: "Suburban Family Home",
-      price: "$849,000",
-      location: "456 Maple Street",
-      beds: 4,
-      baths: 3,
-      sqft: 2400,
-      image: "/api/placeholder/400/250",
-      type: "For Sale",
-      isNew: false,
-      listed: "1 week ago",
-      features: ["Pool", "Garden", "Home Office"],
-    },
-    {
-      id: 3,
-      title: "Luxury Penthouse",
-      price: "$1,299,000",
-      location: "789 Skyview Tower",
-      beds: 3,
-      baths: 3.5,
-      sqft: 2800,
-      image: "/api/placeholder/400/250",
-      type: "For Sale",
-      isNew: true,
-      listed: "3 days ago",
-      features: ["City View", "Concierge", "Gym"],
-    },
-  ];
-
-  const fadeInUp = {
-    initial: { y: 20, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-    transition: { duration: 0.5 },
-  };
+  const EmptyState = () => (
+    <div className="flex flex-col items-center justify-center py-16 px-4">
+      <div className="bg-blue-50 p-6 rounded-full mb-6">
+        <Building className="w-12 h-12 text-blue-600" />
+      </div>
+      <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+        No Properties Available
+      </h3>
+      <p className="text-gray-600 text-center max-w-md mb-8">
+        We are currently updating our property listings. Please check back soon or set up alerts to be notified when new properties become available.
+      </p>
+      <div className="flex gap-4">
+        <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <Search className="w-4 h-4 mr-2" />
+          Browse All Areas
+        </button>
+        <button className="inline-flex items-center px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
+          <Home className="w-4 h-4 mr-2" />
+          Set Alert
+        </button>
+      </div>
+    </div>
+  );
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white min-h-screen">
       <div className="container mx-auto px-4">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4">
+            <Badge className="bg-blue-100 text-blue-700 px-3 py-1 text-sm font-medium rounded-full">
+              Featured Listings
+            </Badge>
+          </div>
           <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
-            Featured Properties
+            Discover Your Dream Property
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            Discover our hand-picked selection of premium properties in the most
-            desirable locations
+            Explore our curated selection of premium properties in the most sought-after locations
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {properties.map((property, index) => (
-            <motion.div
-              key={property.id}
-              initial="initial"
-              animate="animate"
-              variants={fadeInUp}
-              transition={{ delay: index * 0.2 }}
-            >
+        {properties.length === 0 ? (
+          <EmptyState />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {properties.map((property) => (
               <Card
+                key={property.id}
                 className="overflow-hidden group transition-all duration-300 hover:shadow-2xl"
                 onMouseEnter={() => setHoveredId(property.id)}
                 onMouseLeave={() => setHoveredId(null)}
@@ -113,26 +85,20 @@ const FeaturedProperties = () => {
                       className="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute top-4 left-4 flex gap-2">
-                      <Badge
-                        variant="default"
-                        className="bg-blue-600 hover:bg-blue-700"
-                      >
+                      <Badge className="bg-blue-600 hover:bg-blue-700 text-white">
                         {property.type}
                       </Badge>
                       {property.isNew && (
-                        <Badge
-                          variant="default"
-                          className="bg-green-600 hover:bg-green-700"
-                        >
+                        <Badge className="bg-green-600 hover:bg-green-700 text-white">
                           New
                         </Badge>
                       )}
                     </div>
                     <div className="absolute bottom-4 right-4 flex gap-2">
-                      <button className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors">
+                      <button className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors shadow-lg">
                         <Heart className="w-4 h-4 text-gray-700" />
                       </button>
-                      <button className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors">
+                      <button className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors shadow-lg">
                         <Share2 className="w-4 h-4 text-gray-700" />
                       </button>
                     </div>
@@ -145,7 +111,7 @@ const FeaturedProperties = () => {
                     <span>Listed {property.listed}</span>
                   </div>
 
-                  <CardTitle className="text-xl mb-2 font-bold">
+                  <CardTitle className="text-xl mb-2 font-bold hover:text-blue-600 transition-colors">
                     {property.title}
                   </CardTitle>
                   <p className="text-3xl font-bold text-blue-600 mb-4">
@@ -153,8 +119,8 @@ const FeaturedProperties = () => {
                   </p>
 
                   <div className="flex items-center text-gray-600 mb-4">
-                    <MapPin className="w-4 h-4 mr-2 text-blue-600" />
-                    <span className="text-sm">{property.location}</span>
+                    <MapPin className="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" />
+                    <span className="text-sm truncate">{property.location}</span>
                   </div>
 
                   <div className="grid grid-cols-3 gap-4 text-sm text-gray-600 mb-4">
@@ -177,7 +143,7 @@ const FeaturedProperties = () => {
                       <Badge
                         key={idx}
                         variant="secondary"
-                        className="bg-gray-100 text-gray-600"
+                        className="bg-gray-100 text-gray-600 hover:bg-gray-200"
                       >
                         {feature}
                       </Badge>
@@ -186,22 +152,27 @@ const FeaturedProperties = () => {
                 </CardContent>
 
                 <CardFooter className="px-6 pb-6 pt-0">
-                  <Link
-                    className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg hover:shadow-blue-200 flex items-center justify-center"
-                    href={`/listings/${property.id}`}
-                  >
-                    <span className="mr-2">
-                      View {property.title || "Listing"}
-                    </span>
-                    <button className="bg-white text-blue-600 py-1 px-4 rounded-lg hover:bg-gray-200 transition-colors">
-                      Test
-                    </button>
-                  </Link>
+                  <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg hover:shadow-blue-200 flex items-center justify-center group">
+                    <span>View Details</span>
+                    <svg
+                      className="w-4 h-4 ml-2 transform transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
                 </CardFooter>
               </Card>
-            </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,14 +1,21 @@
-// components/layout/Footer.jsx
-import React from 'react';
-import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin, ArrowUpCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin, ArrowUpCircle, Copy } from 'lucide-react';
 
 export default function Footer() {
+  const [statusMessage, setStatusMessage] = useState('');
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    setStatusMessage(`Copied: ${text}`);
+    setTimeout(() => setStatusMessage(''), 3000); // Clear message after 3 seconds
+  };
+
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-gray-900 text-gray-300 relative">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -82,44 +89,34 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold text-white mb-6">Contact Us</h4>
             <div className="space-y-4">
-              <div className="flex items-center space-x-3">
+              <div
+                className="flex items-center space-x-3 cursor-pointer"
+                onClick={() => copyToClipboard('Sobha Saphire, Business Bay')}
+              >
                 <MapPin className="w-5 h-5 text-blue-400" />
-                <span>123 Real Estate Ave, City, Country</span>
+                <span>Sobha Saphire, Business Bay</span>
+                <Copy className="w-4 h-4 text-gray-500" />
               </div>
-              <div className="flex items-center space-x-3">
+              <div
+                className="flex items-center space-x-3 cursor-pointer"
+                onClick={() => copyToClipboard('+9715255900201')}
+              >
                 <Phone className="w-5 h-5 text-blue-400" />
-                <span>+1 234 567 8900</span>
+                <span>+9715255900201</span>
+                <Copy className="w-4 h-4 text-gray-500" />
               </div>
-              <div className="flex items-center space-x-3">
+              <div
+                className="flex items-center space-x-3 cursor-pointer"
+                onClick={() => copyToClipboard('khalidqari1230@gmail.com')}
+              >
                 <Mail className="w-5 h-5 text-blue-400" />
-                <span>contact@realestate.com</span>
+                <span>khalidqari1230@gmail.com</span>
+                <Copy className="w-4 h-4 text-gray-500" />
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Newsletter Section */}
-      {/* <div className="border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex-1 max-w-md">
-              <h5 className="text-lg font-semibold text-white mb-2">Subscribe to Our Newsletter</h5>
-              <p className="text-sm">Stay updated with our latest properties and real estate news</p>
-            </div>
-            <div className="flex w-full md:w-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-2 rounded-l-lg w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button className="bg-blue-600 text-white px-6 py-2 rounded-r-lg hover:bg-blue-700 transition-colors">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
 
       {/* Bottom Bar */}
       <div className="border-t border-gray-800 relative">
@@ -144,6 +141,13 @@ export default function Footer() {
           <ArrowUpCircle className="w-6 h-6" />
         </button>
       </div>
+
+      {/* Status Message */}
+      {statusMessage && (
+        <div className="absolute bottom-8 right-8 bg-blue-600 text-white px-4 py-2 rounded shadow-lg">
+          {statusMessage}
+        </div>
+      )}
     </footer>
   );
 }

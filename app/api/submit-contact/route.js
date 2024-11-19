@@ -6,17 +6,17 @@ import {
   addDoc,
   Timestamp,
 } from "firebase/firestore";
-import { Resend } from 'resend';
+import { Resend } from "resend";
 
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCfj-o4h1Jp49iqREEHSdZZOE4DQRLCNjU",
   authDomain: "problems-33746.firebaseapp.com",
   projectId: "problems-33746",
-  storageBucket: "problems-33746.appspot.com",
+  storageBucket: "problems-33746.firebasestorage.app",
   messagingSenderId: "4637713392",
   appId: "1:4637713392:web:cb8de88019d96a132bf335",
-  measurementId: "G-LCBEGTE3B2",
+  measurementId: "G-LCBEGTE3B2"
 };
 
 // Initialize Firebase
@@ -24,9 +24,9 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Initialize Resend with your API key
-const resend = new Resend('re_gbXr7hK5_FR7tKgaJ4n4Zdy31n9TzgZAB');
-const OWNER_EMAIL = 'khalidqari1230@gmail.com';
-const NOTIFICATION_FROM_EMAIL = 'onboarding@resend.dev';
+const resend = new Resend("re_gbXr7hK5_FR7tKgaJ4n4Zdy31n9TzgZAB");
+const OWNER_EMAIL = "khalidqari1230@gmail.com";
+const NOTIFICATION_FROM_EMAIL = "onboarding@resend.dev";
 
 // Function to save data to Firestore
 async function saveToFirestore(data) {
@@ -93,7 +93,8 @@ export async function POST(request) {
       return NextResponse.json(
         {
           success: false,
-          message: "Missing required fields: name, phone, email, or description.",
+          message:
+            "Missing required fields: name, phone, email, or description.",
         },
         { status: 400 }
       );
