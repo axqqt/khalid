@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function About() {
     return (
       <section className="py-20 bg-gray-100" id="about">
@@ -44,12 +46,12 @@ export default function About() {
             <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-4">
               Whether you’re selling a residential property, commercial space, or luxury villa, Veloxify is here to help you achieve your goals. Our team of dedicated professionals is ready to provide unparalleled support and expertise.
             </p>
-            <a
+            <Link
               href="#contact"
               className="inline-block bg-blue-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all"
             >
               Contact Us Today
-            </a>
+            </Link>
           </div>
         </div>
       </section>

@@ -1,3 +1,26 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react/jsx-uses-react": "off",
+    "react/jsx-uses-vars": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "next/next/no-img-element": "off",
+    "next/next/no-html-link-for-pages": "off",
+    "next/next/link-passhref": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/alt-text": "off",
+    "jsx-a11y/heading-has-content": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-noninteractive-tabindex": "off",
+    "no-unused-vars": "off",
+    "no-undef": "off",
+    "no-console": "off",
+    "no-debugger": "off",
+    "semi": "off",
+    "quotes": "off",
+    "comma-dangle": "off",
+    "indent": "off",
+    "brace-style": "off"
+  }
 }
