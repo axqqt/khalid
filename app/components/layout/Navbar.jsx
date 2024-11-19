@@ -44,7 +44,7 @@ const Navbar = () => {
           >
             <Link href="/" className="group flex items-center space-x-2">
               {/* You can add your logo image here */}
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent group-hover:from-blue-700 group-hover:to-blue-900 transition-all duration-300">
+              <span className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-orange-800 bg-clip-text text-transparent group-hover:from-orange-700 group-hover:to-orange-900 transition-all duration-300">
                 Veloxify
               </span>
             </Link>
@@ -61,10 +61,10 @@ const Navbar = () => {
               >
                 <Link
                   href={item.href}
-                  className="relative px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 rounded-lg group"
+                  className="relative px-4 py-2 text-gray-600 hover:text-orange-600 transition-colors duration-300 rounded-lg group"
                 >
                   <span>{item.label}</span>
-                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-blue-600 transform scale-x-0 origin-left transition-transform group-hover:scale-x-100" />
+                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-orange-600 transform scale-x-0 origin-left transition-transform group-hover:scale-x-100" />
                 </Link>
               </motion.div>
             ))}
@@ -75,7 +75,7 @@ const Navbar = () => {
             >
               <Link
                 href="#contact"
-                className="ml-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-blue-200"
+                className="ml-4 px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors duration-300 shadow-lg hover:shadow-orange-200"
               >
                 Get Started
               </Link>
@@ -86,7 +86,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-300"
+              className="p-2 rounded-lg text-gray-600 hover:text-orange-600 hover:bg-orange-50 transition-colors duration-300"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -115,7 +115,7 @@ const Navbar = () => {
                   <Link
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-between p-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-300"
+                    className="flex items-center justify-between p-3 text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-colors duration-300"
                   >
                     <span>{item.label}</span>
                     <ChevronRight size={16} className="text-gray-400" />
@@ -131,7 +131,7 @@ const Navbar = () => {
                 <Link
                   href="#contact"
                   onClick={() => setIsOpen(false)}
-                  className="block w-full text-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg"
+                  className="block w-full text-center px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors duration-300 shadow-lg"
                 >
                   Get Started
                 </Link>

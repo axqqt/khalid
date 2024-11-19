@@ -5,7 +5,7 @@ export default function About() {
       <section className="py-20 bg-gray-100" id="about">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold text-blue-800 mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold text-amber-800 mb-4">
               About Veloxify
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
@@ -15,7 +15,7 @@ export default function About() {
   
           <div className="grid md:grid-cols-3 gap-10">
             <div className="bg-white shadow-lg rounded-lg p-8">
-              <h3 className="text-2xl font-semibold text-blue-800 mb-4">
+              <h3 className="text-2xl font-semibold text-amber-800 mb-4">
                 Expert Guidance
               </h3>
               <p className="text-gray-600">
@@ -24,7 +24,7 @@ export default function About() {
             </div>
   
             <div className="bg-white shadow-lg rounded-lg p-8">
-              <h3 className="text-2xl font-semibold text-blue-800 mb-4">
+              <h3 className="text-2xl font-semibold text-amber-800 mb-4">
                 Strategic Market Reach
               </h3>
               <p className="text-gray-600">
@@ -33,7 +33,7 @@ export default function About() {
             </div>
   
             <div className="bg-white shadow-lg rounded-lg p-8">
-              <h3 className="text-2xl font-semibold text-blue-800 mb-4">
+              <h3 className="text-2xl font-semibold text-amber-800 mb-4">
                 Client-Centered Approach
               </h3>
               <p className="text-gray-600">
@@ -48,7 +48,7 @@ export default function About() {
             </p>
             <Link
               href="#contact"
-              className="inline-block bg-blue-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all"
+              className="inline-block bg-amber-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-all"
             >
               Contact Us Today
             </Link>

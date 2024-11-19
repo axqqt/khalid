@@ -30,7 +30,7 @@ export default function Services() {
               className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="mb-4">
-                <service.icon className="w-12 h-12 text-blue-600" />
+                <service.icon className="w-12 h-12 text-amber-600" />
               </div>
               <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
               <p className="text-gray-600">{service.description}</p>

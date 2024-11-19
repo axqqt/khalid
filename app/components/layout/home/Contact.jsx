@@ -9,7 +9,7 @@ const Input = ({ label, icon, ...props }) => (
     </label>
     <input
       {...props}
-      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 bg-white"
+      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition duration-200 bg-white"
     />
   </div>
 );
@@ -75,7 +75,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 p-4 sm:p-6 lg:p-8 flex items-center justify-center" id="contact">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-amber-50 p-4 sm:p-6 lg:p-8 flex items-center justify-center" id="contact">
       <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-6 sm:p-8">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-2">
@@ -105,7 +105,7 @@ export default function Contact() {
             label="Full Name"
             icon={
               <svg
-                className="w-4 h-4 text-blue-600"
+                className="w-4 h-4 text-amber-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -132,7 +132,7 @@ export default function Contact() {
               label="Email"
               icon={
                 <svg
-                  className="w-4 h-4 text-blue-600"
+                  className="w-4 h-4 text-amber-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -157,7 +157,7 @@ export default function Contact() {
               label="Phone"
               icon={
                 <svg
-                  className="w-4 h-4 text-blue-600"
+                  className="w-4 h-4 text-amber-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -183,7 +183,7 @@ export default function Contact() {
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
               <svg
-                className="w-4 h-4 text-blue-600"
+                className="w-4 h-4 text-amber-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -204,7 +204,7 @@ export default function Contact() {
               onChange={handleChange}
               placeholder="Tell us about your project or inquiry..."
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200 min-h-[120px] resize-none bg-white"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition duration-200 min-h-[120px] resize-none bg-white"
             />
           </div>
 
@@ -214,10 +214,10 @@ export default function Contact() {
             className={`w-full py-3 px-6 rounded-lg text-white font-medium 
               ${
                 isSubmitting
-                  ? "bg-blue-400 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700"
+                  ? "bg-amber-400 cursor-not-allowed"
+                  : "bg-amber-600 hover:bg-amber-700"
               } 
-              transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-200`}
+              transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-amber-200`}
           >
             {isSubmitting ? (
               <>

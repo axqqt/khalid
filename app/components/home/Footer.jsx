@@ -93,7 +93,7 @@ export default function Footer() {
                 className="flex items-center space-x-3 cursor-pointer"
                 onClick={() => copyToClipboard('Sobha Saphire, Business Bay')}
               >
-                <MapPin className="w-5 h-5 text-blue-400" />
+                <MapPin className="w-5 h-5 text-amber-400" />
                 <span>Sobha Saphire, Business Bay</span>
                 <Copy className="w-4 h-4 text-gray-500" />
               </div>
@@ -101,7 +101,7 @@ export default function Footer() {
                 className="flex items-center space-x-3 cursor-pointer"
                 onClick={() => copyToClipboard('+9715255900201')}
               >
-                <Phone className="w-5 h-5 text-blue-400" />
+                <Phone className="w-5 h-5 text-amber-400" />
                 <span>+9715255900201</span>
                 <Copy className="w-4 h-4 text-gray-500" />
               </div>
@@ -109,7 +109,7 @@ export default function Footer() {
                 className="flex items-center space-x-3 cursor-pointer"
                 onClick={() => copyToClipboard('khalidqari1230@gmail.com')}
               >
-                <Mail className="w-5 h-5 text-blue-400" />
+                <Mail className="w-5 h-5 text-amber-400" />
                 <span>khalidqari1230@gmail.com</span>
                 <Copy className="w-4 h-4 text-gray-500" />
               </div>
@@ -136,7 +136,7 @@ export default function Footer() {
         {/* Scroll to Top Button */}
         <button 
           onClick={scrollToTop}
-          className="absolute right-8 -top-6 bg-blue-600 p-2 rounded-full hover:bg-blue-700 transition-colors"
+          className="absolute right-8 -top-6 bg-amber-600 p-2 rounded-full hover:bg-amber-700 transition-colors"
         >
           <ArrowUpCircle className="w-6 h-6" />
         </button>
@@ -144,7 +144,7 @@ export default function Footer() {
 
       {/* Status Message */}
       {statusMessage && (
-        <div className="absolute bottom-8 right-8 bg-blue-600 text-white px-4 py-2 rounded shadow-lg">
+        <div className="absolute bottom-8 right-8 bg-amber-600 text-white px-4 py-2 rounded shadow-lg">
           {statusMessage}
         </div>
       )}
