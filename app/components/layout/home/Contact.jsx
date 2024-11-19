@@ -135,7 +135,7 @@ export default function Contact() {
 
           <div>
             <label htmlFor="email" className="block text-sm font-semibold mb-1">
-              Email Address
+              Email Address (Optional)
             </label>
             <input
               type="email"
@@ -152,7 +152,7 @@ export default function Contact() {
               htmlFor="description"
               className="block text-sm font-semibold mb-1"
             >
-              Message
+              Message (Optional)
             </label>
             <textarea
               id="description"
