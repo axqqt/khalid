@@ -23,7 +23,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Initialize Resend with your API key
+// Initialize Resend
 const resend = new Resend("re_gbXr7hK5_FR7tKgaJ4n4Zdy31n9TzgZAB");
 const OWNER_EMAIL = "khalidqari1230@gmail.com";
 const NOTIFICATION_FROM_EMAIL = "onboarding@resend.dev";
@@ -51,10 +51,10 @@ async function sendEmailNotification(data) {
     await resend.emails.send({
       from: NOTIFICATION_FROM_EMAIL,
       to: OWNER_EMAIL,
-      subject: `New Lead: ${data.name}`,
+      subject: `New Property Inquiry: ${data.name}`,
       html: `
         <div style="font-family: system-ui, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #0f172a; margin-bottom: 24px;">🎯 New Lead Alert!</h2>
+          <h2 style="color: #0f172a; margin-bottom: 24px;">🏠 New Property Inquiry!</h2>
           
           <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
             <h3 style="color: #0f172a; margin-top: 0;">Contact Details</h3>
@@ -64,7 +64,17 @@ async function sendEmailNotification(data) {
           </div>
 
           <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
-            <h3 style="color: #0f172a; margin-top: 0;">Message</h3>
+            <h3 style="color: #0f172a; margin-top: 0;">Inquiry Details</h3>
+            <p style="margin: 8px 0;"><strong>Inquiry Type:</strong> ${data.inquiryType}</p>
+            <p style="margin: 8px 0;"><strong>Property Type:</strong> ${data.propertyType}</p>
+            <p style="margin: 8px 0;"><strong>Budget:</strong> ${data.budget}</p>
+            <p style="margin: 8px 0;"><strong>Bedrooms:</strong> ${data.bedrooms}</p>
+            <p style="margin: 8px 0;"><strong>Location:</strong> ${data.location}</p>
+            <p style="margin: 8px 0;"><strong>Timeline:</strong> ${data.timeline}</p>
+          </div>
+
+          <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+            <h3 style="color: #0f172a; margin-top: 0;">Additional Description</h3>
             <p style="margin: 8px 0;">${data.description}</p>
           </div>
 
@@ -85,16 +95,41 @@ export async function POST(request) {
   try {
     // Parse the request body
     const body = await request.json();
-    const { name, phone, email, description } = body;
+    const {
+      name,
+      phone,
+      email,
+      inquiryType,
+      propertyType,
+      budget,
+      bedrooms,
+      location,
+      timeline,
+      description,
+    } = body;
     const submissionDate = new Date().toISOString().split("T")[0];
 
     // Validate the request body
-    if (!name || !phone || !email || !description) {
+    const requiredFields = [
+      "name",
+      "phone",
+      "email",
+      "inquiryType",
+      "propertyType",
+      "budget",
+      "bedrooms",
+      "location",
+      "timeline",
+      "description",
+    ];
+
+    const missingFields = requiredFields.filter((field) => !body[field]);
+
+    if (missingFields.length > 0) {
       return NextResponse.json(
         {
           success: false,
-          message:
-            "Missing required fields: name, phone, email, or description.",
+          message: `Missing required fields: ${missingFields.join(", ")}.`,
         },
         { status: 400 }
       );
@@ -105,6 +140,12 @@ export async function POST(request) {
       name,
       phone,
       email,
+      inquiryType,
+      propertyType,
+      budget,
+      bedrooms,
+      location,
+      timeline,
       description,
       submissionDate,
     });
@@ -114,6 +155,12 @@ export async function POST(request) {
       name,
       phone,
       email,
+      inquiryType,
+      propertyType,
+      budget,
+      bedrooms,
+      location,
+      timeline,
       description,
       submissionDate,
       submissionId,
@@ -125,7 +172,7 @@ export async function POST(request) {
     // Return success response
     return NextResponse.json({
       success: true,
-      message: "Submission successfully saved and notification sent",
+      message: "Inquiry successfully submitted",
       submissionId,
     });
   } catch (error) {
