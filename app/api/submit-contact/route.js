@@ -10,13 +10,13 @@ import { Resend } from "resend";
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCfj-o4h1Jp49iqREEHSdZZOE4DQRLCNjU",
-  authDomain: "problems-33746.firebaseapp.com",
-  projectId: "problems-33746",
-  storageBucket: "problems-33746.firebasestorage.app",
-  messagingSenderId: "4637713392",
-  appId: "1:4637713392:web:cb8de88019d96a132bf335",
-  measurementId: "G-LCBEGTE3B2",
+  apiKey: "AIzaSyDr5CXk4zlqqdwjbjVaa5G7UMmH7TVokz0",
+  authDomain: "khalid-ffc85.firebaseapp.com",
+  projectId: "khalid-ffc85",
+  storageBucket: "khalid-ffc85.firebasestorage.app",
+  messagingSenderId: "260271633885",
+  appId: "1:260271633885:web:2efd76bd47f49655337234",
+  measurementId: "G-YKYYYC8FT6",
 };
 
 // Initialize Firebase
@@ -31,7 +31,7 @@ const NOTIFICATION_FROM_EMAIL = "onboarding@resend.dev";
 // Function to save data to Firestore
 async function saveToFirestore(data) {
   try {
-    const submissionsRef = collection(db, "clients");
+    const submissionsRef = collection(db, "property-inquiries");
     const docRef = await addDoc(submissionsRef, {
       ...data,
       createdAt: Timestamp.now(),
