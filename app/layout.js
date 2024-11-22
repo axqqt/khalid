@@ -13,8 +13,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Khalid Real Estate",
-  description: "Real Estate For Khalid",
+  title: "KhalidEstate",
+  description: "Real Estate By Khalid",
 };
 
 export default function RootLayout({ children }) {
