@@ -6,10 +6,10 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-amber-800 mb-4">
-              About Veloxify
+              About KhalidEstates
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              At Veloxify, we’re more than just a real estate agency. We’re a dedicated team of experts focused on helping property owners and investors navigate the dynamic Dubai real estate market. Our commitment to excellence and a personalized approach sets us apart in a highly competitive industry.
+              At KhalidEstates, we’re more than just a real estate agency. We’re a dedicated team of experts focused on helping property owners and investors navigate the dynamic Dubai real estate market. Our commitment to excellence and a personalized approach sets us apart in a highly competitive industry.
             </p>
           </div>
   
@@ -37,14 +37,14 @@ export default function About() {
                 Client-Centered Approach
               </h3>
               <p className="text-gray-600">
-                At Veloxify, our clients always come first. We tailor our services to meet your unique needs, ensuring transparency, integrity, and outstanding customer service at every step of your journey with us.
+                At KhalidEstates, our clients always come first. We tailor our services to meet your unique needs, ensuring transparency, integrity, and outstanding customer service at every step of your journey with us.
               </p>
             </div>
           </div>
           
           <div className="text-center mt-12">
             <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-4">
-              Whether you’re selling a residential property, commercial space, or luxury villa, Veloxify is here to help you achieve your goals. Our team of dedicated professionals is ready to provide unparalleled support and expertise.
+              Whether you’re selling a residential property, commercial space, or luxury villa, KhalidEstates is here to help you achieve your goals. Our team of dedicated professionals is ready to provide unparalleled support and expertise.
             </p>
             <Link
               href="#contact"

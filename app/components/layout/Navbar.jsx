@@ -45,7 +45,7 @@ const Navbar = () => {
             <Link href="/" className="group flex items-center space-x-2">
               {/* You can add your logo image here */}
               <span className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-orange-800 bg-clip-text text-transparent group-hover:from-orange-700 group-hover:to-orange-900 transition-all duration-300">
-                Veloxify
+              KhalidEstates
               </span>
             </Link>
           </motion.div>

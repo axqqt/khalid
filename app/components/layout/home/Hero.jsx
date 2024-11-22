@@ -1,9 +1,37 @@
+/* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen pt-16 pb-16 flex items-center bg-gradient-to-r from-amber-600 to-amber-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <section className="relative min-h-screen flex items-center">
+      {/* Video Background */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <video
+          style={{
+            objectFit: "none",
+            width: "100%",
+            height: "105%",
+            position: "relative",
+          }}
+          className="absolute inset-0 object-cover w-full h-full"
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/video-poster.jpg" // Add a poster image for better loading experience
+        >
+          <source
+            src="https://res.cloudinary.com/dsto9mmt0/video/upload/v1732270273/THE_CORPORATE_COLLECTION_II_-_Royalty-Free_Stock_Video_Footage_in_HD_and_4K_from_FILMPAC_-_Trim_mfgudu.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+        {/* Overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-amber-600/40 z-10"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Your Trusted Dubai Real Estate Expert
@@ -12,9 +40,9 @@ export default function Hero() {
             I specialize in helping you buy, sell, or invest in Dubai's vibrant
             property market—residential, commercial, secondary, or off-plan.
             With personalized service, expert guidance, and a passion for
-            delivering results, I’ll make your real estate journey seamless and
-            successful. Let’s find your perfect property or the
-            right buyer today!
+            delivering results, I'll make your real estate journey seamless and
+            successful. Let's find your perfect property or the right buyer
+            today!
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <Link
@@ -27,7 +55,7 @@ export default function Hero() {
               href="#about"
               className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-amber-600 transition-all"
             >
-              Learn More About Veloxify
+              Learn More About KhalidEstates
             </Link>
           </div>
         </div>
