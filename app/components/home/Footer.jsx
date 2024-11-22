@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-white mb-6">Real Estate Co.</h3>
+            <h3 className="text-2xl font-bold text-white mb-6">KhalidEstates Co.</h3>
             <p className="text-sm">
               Your trusted partner in finding the perfect property. We make your dream home a reality.
             </p>
@@ -123,7 +123,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm">
-              © {new Date().getFullYear()} Real Estate Co. All rights reserved.
+              © {new Date().getFullYear()} KhalidEstates Co. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
