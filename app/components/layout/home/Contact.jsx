@@ -109,7 +109,7 @@ export default function DetailedPropertyInquiryForm() {
     >
       {/* Video Background */}
       <video
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-fill"
         autoPlay
         loop
         muted
@@ -212,7 +212,7 @@ export default function DetailedPropertyInquiryForm() {
             />
 
             <Input
-              label="Email"
+              label="Email (Optional)"
               icon={
                 <svg
                   className="w-5 h-5 text-amber-500"
@@ -234,7 +234,7 @@ export default function DetailedPropertyInquiryForm() {
               value={formData.email}
               onChange={handleChange}
               placeholder="john@example.com"
-              required
+              
             />
           </div>
 
