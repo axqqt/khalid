@@ -50,7 +50,7 @@ const FeaturedProperties = ({ properties = [] }) => {
   );
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-white min-h-screen">
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white min-h-screen" id="properties">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <div className="inline-block mb-4">

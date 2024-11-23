@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center">
+    <section className="relative min-h-screen flex items-center" id="home">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <video
@@ -21,7 +21,7 @@ export default function Hero() {
           poster="/video-poster.jpg" // Add a poster image for better loading experience
         >
           <source
-            src="https://res.cloudinary.com/dsto9mmt0/video/upload/v1732270273/THE_CORPORATE_COLLECTION_II_-_Royalty-Free_Stock_Video_Footage_in_HD_and_4K_from_FILMPAC_-_Trim_mfgudu.mp4"
+            src="khalidmain.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.

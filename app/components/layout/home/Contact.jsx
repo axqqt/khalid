@@ -234,7 +234,6 @@ export default function DetailedPropertyInquiryForm() {
               value={formData.email}
               onChange={handleChange}
               placeholder="john@example.com"
-              
             />
           </div>
 

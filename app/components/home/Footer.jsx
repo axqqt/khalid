@@ -1,29 +1,43 @@
-import React, { useState } from 'react';
-import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin, ArrowUpCircle, Copy } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Mail,
+  Phone,
+  MapPin,
+  ArrowUpCircle,
+  Copy,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
-  const [statusMessage, setStatusMessage] = useState('');
+  const [statusMessage, setStatusMessage] = useState("");
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
     setStatusMessage(`Copied: ${text}`);
-    setTimeout(() => setStatusMessage(''), 3000); // Clear message after 3 seconds
+    setTimeout(() => setStatusMessage(""), 3000); // Clear message after 3 seconds
   };
 
   return (
-    <footer className="bg-gray-900 text-gray-300 relative" >
+    <footer className="bg-gray-900 text-gray-300 relative">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-white mb-6">KhalidEstates Co.</h3>
+            <h3 className="text-2xl font-bold text-white mb-6">
+              KhalidEstates Co.
+            </h3>
             <p className="text-sm">
-              Your trusted partner in finding the perfect property. We make your dream home a reality.
+              Your trusted partner in finding the perfect property. We make your
+              dream home a reality.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-white transition-colors">
@@ -43,55 +57,94 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold text-white mb-6">Quick Links</h4>
+            <h4 className="text-lg font-semibold text-white mb-6">
+              Quick Links
+            </h4>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="hover:text-white transition-colors">Home</a>
+                <Link
+                  href="#home"
+                  className="hover:text-white transition-colors"
+                >
+                  Home
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">Properties</a>
+                <Link
+                  Link
+                  href="#properties"
+                  className="hover:text-white transition-colors"
+                >
+                  Properties
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">About Us</a>
+                <a href="#about" className="hover:text-white transition-colors">
+                  About Us
+                </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">Services</a>
+                <a
+                  href="#services"
+                  className="hover:text-white transition-colors"
+                >
+                  Services
+                </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">Contact</a>
+                <a
+                  href="#contact"
+                  className="hover:text-white transition-colors"
+                >
+                  Contact
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Services */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-6">Our Services</h4>
+          {/* <div>
+            <h4 className="text-lg font-semibold text-white mb-6">
+              Our Services
+            </h4>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="hover:text-white transition-colors">Property Sales</a>
+                <a href="#" className="hover:text-white transition-colors">
+                  Property Sales
+                </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">Property Rentals</a>
+                <a href="#" className="hover:text-white transition-colors">
+                  Property Rentals
+                </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">Property Management</a>
+                <a href="#" className="hover:text-white transition-colors">
+                  Property Management
+                </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">Investment Consulting</a>
+                <a href="#" className="hover:text-white transition-colors">
+                  Investment Consulting
+                </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">Market Analysis</a>
+                <a href="#" className="hover:text-white transition-colors">
+                  Market Analysis
+                </a>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Contact Info */}
-          <div id='footer'>
-            <h4 className="text-lg font-semibold text-white mb-6">Contact Us</h4>
+          <div id="footer">
+            <h4 className="text-lg font-semibold text-white mb-6">
+              Contact Us
+            </h4>
             <div className="space-y-4">
               <div
                 className="flex items-center space-x-3 cursor-pointer"
-                onClick={() => copyToClipboard('Sobha Saphire, Business Bay')}
+                onClick={() => copyToClipboard("Sobha Saphire, Business Bay")}
               >
                 <MapPin className="w-5 h-5 text-amber-400" />
                 <span>Sobha Saphire, Business Bay</span>
@@ -99,7 +152,7 @@ export default function Footer() {
               </div>
               <div
                 className="flex items-center space-x-3 cursor-pointer"
-                onClick={() => copyToClipboard('+9715255900201')}
+                onClick={() => copyToClipboard("+9715255900201")}
               >
                 <Phone className="w-5 h-5 text-amber-400" />
                 <span>+9715255900201</span>
@@ -107,7 +160,7 @@ export default function Footer() {
               </div>
               <div
                 className="flex items-center space-x-3 cursor-pointer"
-                onClick={() => copyToClipboard('khalidqari1230@gmail.com')}
+                onClick={() => copyToClipboard("khalidqari1230@gmail.com")}
               >
                 <Mail className="w-5 h-5 text-amber-400" />
                 <span>khalidqari1230@gmail.com</span>
@@ -123,18 +176,25 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm">
-              © {new Date().getFullYear()} KhalidEstates Co. All rights reserved.
+              © {new Date().getFullYear()} KhalidEstates Co. All rights
+              reserved.
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">Cookies Policy</a>
+              <a href="#" className="hover:text-white transition-colors">
+                Privacy Policy
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Terms of Service
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Cookies Policy
+              </a>
             </div>
           </div>
         </div>
 
         {/* Scroll to Top Button */}
-        <button 
+        <button
           onClick={scrollToTop}
           className="absolute right-8 -top-6 bg-amber-600 p-2 rounded-full hover:bg-amber-700 transition-colors"
         >
