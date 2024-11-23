@@ -22,9 +22,9 @@ export default function About() {
             <h3 className="text-2xl font-semibold text-amber-800">
               Khalid Yousoof
             </h3>
-            <p className="text-gray-600 italic">
+            <b className="text-gray-800 italic">
               Former Sobha Realty Professional
-            </p>
+            </b>
           </div>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             At KhalidEstates, we're more than just a real estate agency. Led by
