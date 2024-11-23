@@ -152,10 +152,10 @@ export default function Footer() {
               </div>
               <div
                 className="flex items-center space-x-3 cursor-pointer"
-                onClick={() => copyToClipboard("+9715255900201")}
+                onClick={() => copyToClipboard("+971525906261")}
               >
                 <Phone className="w-5 h-5 text-amber-400" />
-                <span>+9715255900201</span>
+                <span>+971525906261</span>
                 <Copy className="w-4 h-4 text-gray-500" />
               </div>
               <div

@@ -8,6 +8,7 @@ import About from "./components/layout/home/About";
 import Contact from "./components/layout/home/Contact";
 import Hero from "./components/layout/home/Hero";
 import Navbar from "./components/layout/Navbar";
+import WhatsAppButton from "./components/Whatsapp";
 
 export default function Home() {
 
@@ -22,6 +23,7 @@ export default function Home() {
       <Contact />
       <About />
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }
