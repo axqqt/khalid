@@ -40,16 +40,36 @@ export default function Footer() {
               dream home a reality.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-white transition-colors">
+              <a 
+                href="https://www.facebook.com/profile.php?id=61569514566170" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-white transition-colors"
+              >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a 
+                href="https://www.instagram.com/kqmrealestate" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-white transition-colors"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a 
+                href="https://x.com/khalidqmy" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-white transition-colors"
+              >
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a 
+                href="https://www.linkedin.com/in/khalid-yosouf-8a69a1209" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-white transition-colors"
+              >
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
@@ -71,7 +91,6 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  Link
                   href="#properties"
                   className="hover:text-white transition-colors"
                 >
@@ -101,40 +120,6 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* Services */}
-          {/* <div>
-            <h4 className="text-lg font-semibold text-white mb-6">
-              Our Services
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Property Sales
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Property Rentals
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Property Management
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Investment Consulting
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Market Analysis
-                </a>
-              </li>
-            </ul>
-          </div> */}
 
           {/* Contact Info */}
           <div id="footer">
