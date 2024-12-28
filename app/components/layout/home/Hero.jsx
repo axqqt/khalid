@@ -1,33 +1,73 @@
 /* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function Hero() {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoElement, setVideoElement] = useState(null);
+
+  useEffect(() => {
+    // Reset video loaded state when component mounts
+    setVideoLoaded(false);
+  }, []);
+
+  const handleVideoLoad = () => {
+    if (videoElement && videoElement.readyState >= 3) {
+      setVideoLoaded(true);
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center" id="home">
-      {/* Video Background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <video
-          style={{
-            objectFit: "none",
-            width: "100%",
-            height: "105%",
-            position: "relative",
-          }}
-          className="absolute inset-0 object-cover w-full h-full"
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/video-poster.jpg" // Add a poster image for better loading experience
+        {/* Loading Image */}
+        <div 
+          className={`absolute inset-0 transition-opacity duration-700 ${
+            videoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
         >
-          <source
-            src="khalidmain.mp4"
-            type="video/mp4"
+          <Image
+            src="/hero.jpg"
+            alt="Dubai Real Estate"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
-          Your browser does not support the video tag.
-        </video>
-        {/* Overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-600/40 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-600/40"></div>
+        </div>
+
+        {/* Video Background */}
+        <div 
+          className={`absolute inset-0 transition-opacity duration-700 ${
+            videoLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <video
+            ref={el => setVideoElement(el)}
+            onCanPlay={handleVideoLoad}
+            onLoadedData={handleVideoLoad}
+            style={{
+              width: "100%",
+              height: "105%",
+              position: "relative",
+            }}
+            className="absolute inset-0 object-cover w-full h-full"
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/hero.jpg"
+          >
+            <source
+              src="khalidmain.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-600/40"></div>
+        </div>
       </div>
 
       {/* Content */}
