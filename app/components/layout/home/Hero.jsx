@@ -8,7 +8,6 @@ export default function Hero() {
   const [videoElement, setVideoElement] = useState(null);
 
   useEffect(() => {
-    // Reset video loaded state when component mounts
     setVideoLoaded(false);
   }, []);
 
@@ -24,7 +23,7 @@ export default function Hero() {
         {/* Loading Image */}
         <div 
           className={`absolute inset-0 transition-opacity duration-700 ${
-            videoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            videoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-90'
           }`}
         >
           <Image
@@ -33,15 +32,15 @@ export default function Hero() {
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-600/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-600/10"></div>
         </div>
 
         {/* Video Background */}
         <div 
           className={`absolute inset-0 transition-opacity duration-700 ${
-            videoLoaded ? 'opacity-100' : 'opacity-0'
+            videoLoaded ? 'opacity-90' : 'opacity-0'
           }`}
         >
           <video
@@ -66,7 +65,7 @@ export default function Hero() {
             />
             Your browser does not support the video tag.
           </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-600/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-600/10"></div>
         </div>
       </div>
 

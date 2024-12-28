@@ -164,7 +164,7 @@ export default function Footer() {
               © {new Date().getFullYear()} KhalidEstates Co. All rights
               reserved.
             </div>
-            <div className="flex space-x-6 text-sm">
+            {/* <div className="flex space-x-6 text-sm">
               <a href="#" className="hover:text-white transition-colors">
                 Privacy Policy
               </a>
@@ -174,7 +174,7 @@ export default function Footer() {
               <a href="#" className="hover:text-white transition-colors">
                 Cookies Policy
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
 
