@@ -23,7 +23,7 @@ export default function Hero() {
         {/* Loading Image */}
         <div 
           className={`absolute inset-0 transition-opacity duration-700 ${
-            videoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-90'
+            videoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-50'
           }`}
         >
           <Image
@@ -32,7 +32,7 @@ export default function Hero() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-90"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-amber-600/10"></div>
         </div>
