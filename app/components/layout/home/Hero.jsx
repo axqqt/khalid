@@ -22,8 +22,8 @@ export default function Hero() {
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         {/* Loading Image */}
         <div
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            videoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-80'
+          className={`absolute inset-0 transition-opacity duration-700 ${
+            videoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-90'
           }`}
         >
           <Image
@@ -32,15 +32,15 @@ export default function Hero() {
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover opacity-90"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-amber-600/10"></div>
         </div>
 
         {/* Video Background */}
         <div
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            videoLoaded ? 'opacity-100' : 'opacity-0'
+          className={`absolute inset-0 transition-opacity duration-700 ${
+            videoLoaded ? 'opacity-90' : 'opacity-0'
           }`}
         >
           <video
@@ -72,26 +72,26 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 opacity-0 transition-opacity duration-1000 ease-in-out delay-300">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Your Trusted Dubai Real Estate Expert
           </h1>
-          <p className="text-lg text-white mb-8 max-w-3xl mx-auto opacity-0 transition-opacity duration-1000 ease-in-out delay-500">
-            Specializing in buying, selling, and investing in Dubai's vibrant
-            property market—whether it's residential, commercial, secondary, or
-            off-plan. With personalized service, expert guidance, and a passion
-            for delivering results, let's find your perfect property or the
-            right buyer today!
+          <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
+            I specialize in helping you buy, sell, or invest in Dubai's vibrant
+            property market—residential, commercial, secondary, or off-plan. With
+            personalized service, expert guidance, and a passion for delivering
+            results, I'll make your real estate journey seamless and successful.
+            Let's find your perfect property or the right buyer today!
           </p>
-          <div className="flex justify-center gap-6 flex-wrap">
+          <div className="flex justify-center gap-4 flex-wrap">
             <Link
               href="#contact"
-              className="bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-500 transition-all shadow-lg transform hover:scale-105"
+              className="bg-white text-amber-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all shadow-lg"
             >
               Sell Your Property
             </Link>
             <Link
               href="#about"
-              className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-amber-600 transition-all transform hover:scale-105"
+              className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-amber-600 transition-all"
             >
               Learn More About KhalidEstates
             </Link>
